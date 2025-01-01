@@ -23,6 +23,7 @@ graph LR
   
   %% Annotations
   style C fill:#f88,stroke:#f33,stroke-width:4px
+
 ```
 
 ## Introduction
