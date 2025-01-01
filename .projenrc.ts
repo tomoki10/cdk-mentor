@@ -1,17 +1,26 @@
 import { awscdk } from 'projen';
+import { NodePackageManager } from 'projen/lib/javascript';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'tomoki10',
   authorAddress: 'tomoki10wakhok@gmail.com',
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.68.0',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.5.0',
-  name: 'cdk-sensei',
+  name: 'cdk-mentor',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/tomoki10/cdk-sensei.git',
+  repositoryUrl: 'https://github.com/tomoki10/cdk-mentor.git',
+  majorVersion: 1,
+  packageManager: NodePackageManager.NPM,
+  license: 'MIT',
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  devDeps: ['@aws-cdk/assert'],
+
+  // jsii publishing
+  publishToPypi: {
+    distName: 'cdk-mentor',
+    module: 'cdk_mentor',
+  },
+
+  gitignore: ['.vscode', '**/.DS_Store'],
 });
 project.synth();

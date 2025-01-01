@@ -1,8 +1,8 @@
 {
-  "name": "cdk-sensei",
+  "name": "cdk-mentor",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomoki10wakhok/cdk-sensei.git"
+    "url": "https://github.com/tomoki10/cdk-mentor.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -17,6 +17,7 @@
     "package": "npx projen package",
     "package-all": "npx projen package-all",
     "package:js": "npx projen package:js",
+    "package:python": "npx projen package:python",
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
@@ -34,12 +35,13 @@
     "organization": false
   },
   "devDependencies": {
+    "@aws-cdk/assert": "^2.68.0",
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.9.3",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.68.0",
     "commit-and-tag-version": "^12",
     "constructs": "10.0.5",
     "eslint": "^9",
@@ -58,14 +60,14 @@
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.68.0",
     "constructs": "^10.0.5"
   },
   "keywords": [
     "cdk"
   ],
   "main": "lib/index.js",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
@@ -119,7 +121,12 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "cdk-mentor",
+        "module": "cdk_mentor"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
