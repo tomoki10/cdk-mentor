@@ -25,7 +25,7 @@ describe('PascalCase Construct ID Check', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
   describe.each`
@@ -49,7 +49,7 @@ describe('PascalCase Construct ID Check', () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[ERR:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -76,7 +76,7 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[WARN:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -114,7 +114,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -131,7 +131,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 });

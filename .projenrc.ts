@@ -15,12 +15,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   devDeps: ['@aws-cdk/assert'],
 
-  // jsii publishing
-  publishToPypi: {
-    distName: 'cdk-mentor',
-    module: 'cdk_mentor',
-  },
-
   gitignore: ['.vscode', '**/.DS_Store'],
 });
 project.synth();
