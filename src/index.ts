@@ -26,7 +26,7 @@ export class CdkMentor implements cdk.IAspect {
         // If it is not a CrossStack reference, immediately WARN
         if (stackDependencies && Object.keys(stackDependencies).length === 0) {
           cdk.Annotations.of(node).addWarning(
-            `[WARN:001]: Construct ID names should NOT include the word "Stack" "${constructId}". The Stack concept from CDK is reflected in the resource names.`
+            `[WARN:001]: Construct ID names should NOT include the word "Stack" "${constructId}". The Stack concept from CDK is reflected in the resource names.`,
           );
         }
         // Exclude if it is a CrossStack reference and the referenced stack name is included.
@@ -37,14 +37,14 @@ export class CdkMentor implements cdk.IAspect {
           !constructId.includes(this.getJsonRootKey(stackDependencies))
         ) {
           cdk.Annotations.of(node).addWarning(
-            `[WARN:001]: Construct ID names should NOT include the word "Stack" "${constructId}". The Stack concept from CDK is reflected in the resource names.`
+            `[WARN:001]: Construct ID names should NOT include the word "Stack" "${constructId}". The Stack concept from CDK is reflected in the resource names.`,
           );
         }
       }
 
       if (constructId && constructId.includes('Construct')) {
         cdk.Annotations.of(node).addWarning(
-          `[WARN:002]: Construct ID names should NOT include the word "Construct" "${constructId}". The Construct concept from CDK is reflected in the resource names.`
+          `[WARN:002]: Construct ID names should NOT include the word "Construct" "${constructId}". The Construct concept from CDK is reflected in the resource names.`,
         );
       }
     }
