@@ -13,7 +13,7 @@ export const EXCLUDED_RESOURCE_TYPES = new Set([
   'AWS::CloudFormation::Stack',
   'AWS::CloudFront::Distribution',
   'AWS::SNS::Subscription',
-  // ↓ No Test Added
+  // No Test Added. Because since the following resources are not available in the current version of CDK
   'AWS::ApiGatewayV2::Integration',
   'AWS::ApiGatewayV2::Route',
   'AWS::Lambda::Permission',
