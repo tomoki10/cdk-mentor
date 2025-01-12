@@ -25,7 +25,6 @@ export class CdkMentor implements cdk.IAspect {
             (rule) => node.cfnResourceType === rule.resourceType && constructId.includes(rule.namePattern)
           )
         ) {
-          console.log();
           cdk.Annotations.of(node).addError(`[ERR:001]: Construct ID "${constructId}"should be defined in PascalCase.`);
         }
       }

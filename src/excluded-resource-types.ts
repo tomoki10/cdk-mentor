@@ -27,8 +27,6 @@ export const EXCLUDED_PREFIX_NAMES = [
   'waiter-state-machine',
 ];
 
-// 明日は特定のリソースが、特定の項目名の場合除外する設定を追加
-
 interface RESOURCE_AND_NAME_PATTERN {
   resourceType: string;
   namePattern: string;
