@@ -1,24 +1,24 @@
 import { SynthUtils } from '@aws-cdk/assert';
 
+import { KubectlV24Layer } from '@aws-cdk/lambda-layer-kubectl-v24';
 import * as cdk from 'aws-cdk-lib';
 
 import { Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { Construct } from 'constructs';
-import * as sns from 'aws-cdk-lib/aws-sns';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as autoscaling from 'aws-cdk-lib/aws-autoscaling';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecsPatterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as eks from 'aws-cdk-lib/aws-eks';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as route53Patterns from 'aws-cdk-lib/aws-route53-patterns';
+import * as sns from 'aws-cdk-lib/aws-sns';
 import * as snsSubscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import { KubectlV24Layer } from '@aws-cdk/lambda-layer-kubectl-v24';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { Construct } from 'constructs';
 
 // MEMO: The following modules are not available in the current CDK version
 // import * as appconfig from '@aws-cdk/aws-appconfig';
@@ -43,7 +43,7 @@ describe('PascalCase Construct ID Check', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
   describe.each`
@@ -67,7 +67,7 @@ describe('PascalCase Construct ID Check', () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[ERR:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -121,7 +121,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -152,7 +152,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -238,7 +238,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -268,7 +268,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -305,7 +305,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -341,7 +341,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -369,7 +369,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0] // MEMO: EKS L2 construct includes two CloudFormation::Stack
+      })[0], // MEMO: EKS L2 construct includes two CloudFormation::Stack
     );
   });
 
@@ -402,7 +402,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -430,7 +430,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -481,7 +481,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0] // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
+      })[0], // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
     );
   });
 
@@ -516,7 +516,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 });
@@ -542,7 +542,7 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[WARN:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -580,7 +580,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -597,7 +597,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 });
