@@ -4,42 +4,50 @@ This library acts as a mentor to AWS CDK users, providing guidance and suggestio
 
 ![Stability: Experimental](https://img.shields.io/badge/stability-Experimental-important.svg?style=for-the-badge)
 
+[![View on Construct Hub](https://constructs.dev/badge?package=cdk-mentor)](https://constructs.dev/packages/cdk-mentor)
+
 ## Overview Image
+
+![cdk-mentor-demo](images/cdk-mentor-demo.gif)
 
 This library uses Aspects and is executed during the prepare phase.
 
-```mermaid
-graph LR
-  A[CDK App<br>Source Code] --> B[Construction Phase]
-  subgraph CDK App
-    B --> C[Prepare Phase]
-    C --> D[Validate Phase]
-    D --> E[Synthesize Phase]
-  end
-
-  %% Styling
-  classDef emphasis fill:#f88,stroke:#f33,stroke-width:4px;
-  class C emphasis
-  
-  %% Annotations
-  style C fill:#f88,stroke:#f33,stroke-width:4px
-
-```
+![phase](images/cdk-mentor-phase.png)
 
 ## Introduction
 
+```bash
+% npm install -D cdk-mentor
 ```
+
+```ts
 import * as cdk from 'aws-cdk-lib';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import { TestStack } from '../lib/test-stack';
+import { CdkMentor } from 'cdk-mentor';
 
 const app = new cdk.App();
-stack = new Stack(app);
+const stack = new TestStack(app, 'TestStack');
 cdk.Aspects.of(app).add(new CdkMentor());
-
-new sns.Topic(stack, 'testStack');
 ```
 
+```ts
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as sns from 'aws-cdk-lib/aws-sns';
+
+export class TestStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    new sns.Topic(this, 'testTopic'); // Construct ID is NOT PascalCase
+  }
+}
 ```
-% npx cdk synth
+
+```bash
+% npx cdk synth -q
+[Error at /TestStack/testTopic/Resource] [ERR:001]: Construct ID "testTopic"should be defined in PascalCase.
+Found errors
 ```
 
 ## Available Rules
