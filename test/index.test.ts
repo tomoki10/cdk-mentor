@@ -17,7 +17,6 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as route53Patterns from 'aws-cdk-lib/aws-route53-patterns';
 import * as snsSubscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { KubectlV24Layer } from '@aws-cdk/lambda-layer-kubectl-v24';
 
@@ -422,7 +421,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
    */
   test('Verify that SNS::Subscription exists but does not raise an error', () => {
     const topic = new sns.Topic(stack, 'Topic');
-    topic.addSubscription(new subs.UrlSubscription('https://foobar.com/'));
+    topic.addSubscription(new snsSubscriptions.UrlSubscription('https://foobar.com/'));
     const template = Template.fromStack(stack);
     template.resourceCountIs('AWS::SNS::Subscription', 1);
     const messages = SynthUtils.synthesize(stack).messages;
