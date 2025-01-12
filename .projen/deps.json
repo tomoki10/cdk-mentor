@@ -5,6 +5,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/lambda-layer-kubectl-v24",
+      "type": "build"
+    },
+    {
       "name": "@stylistic/eslint-plugin",
       "version": "^2",
       "type": "build"

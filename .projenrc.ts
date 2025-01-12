@@ -13,7 +13,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageManager: NodePackageManager.NPM,
   license: 'MIT',
 
-  devDeps: ['@aws-cdk/assert'],
+  devDeps: ['@aws-cdk/assert', '@aws-cdk/lambda-layer-kubectl-v24'],
 
   gitignore: ['.vscode', '**/.DS_Store'],
 });

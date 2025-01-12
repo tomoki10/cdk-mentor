@@ -1,5 +1,10 @@
 import * as cdk from 'aws-cdk-lib';
 import { IConstruct } from 'constructs';
+import {
+  EXCLUDED_PREFIX_NAMES,
+  EXCLUDED_RESOURCE_TYPES,
+  EXCLUDED_RESOURCE_AND_NAME_PATTERNS,
+} from './excluded-resource-types';
 
 export class CdkMentor implements cdk.IAspect {
   public visit(node: IConstruct): void {
@@ -12,7 +17,16 @@ export class CdkMentor implements cdk.IAspect {
        * Rule001
        */
       if (constructId && !this.isPascalCase(constructId)) {
-        cdk.Annotations.of(node).addError(`[ERR:001]: Construct ID "${constructId}"should be defined in PascalCase.`);
+        // Exclude specific AWS resources
+        if (
+          !EXCLUDED_RESOURCE_TYPES.has(node.cfnResourceType) &&
+          !EXCLUDED_PREFIX_NAMES.some((prefix) => constructId.startsWith(prefix)) &&
+          !EXCLUDED_RESOURCE_AND_NAME_PATTERNS.some(
+            (rule) => node.cfnResourceType === rule.resourceType && constructId.includes(rule.namePattern),
+          )
+        ) {
+          cdk.Annotations.of(node).addError(`[ERR:001]: Construct ID "${constructId}"should be defined in PascalCase.`);
+        }
       }
 
       /**
