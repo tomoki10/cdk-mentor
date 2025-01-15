@@ -125,7 +125,7 @@
     "targets": {
       "python": {
         "distName": "cdk-mentor",
-        "module": "cdk_montor"
+        "module": "cdk_mentor"
       }
     },
     "tsc": {
