@@ -16,7 +16,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: ['@aws-cdk/assert', '@aws-cdk/lambda-layer-kubectl-v24'],
   publishToPypi: {
     distName: 'cdk-mentor',
-    module: 'cdk_montor',
+    module: 'cdk_mentor',
   },
   gitignore: ['.vscode', '**/.DS_Store'],
 });
