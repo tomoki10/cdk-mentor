@@ -43,7 +43,7 @@ describe('PascalCase Construct ID Check', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
   describe.each`
@@ -67,7 +67,7 @@ describe('PascalCase Construct ID Check', () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[ERR:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -121,7 +121,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -152,7 +152,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -238,7 +238,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -268,7 +268,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -305,7 +305,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -341,7 +341,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -369,7 +369,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0] // MEMO: EKS L2 construct includes two CloudFormation::Stack
+      })[0], // MEMO: EKS L2 construct includes two CloudFormation::Stack
     );
   });
 
@@ -402,7 +402,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -430,7 +430,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -481,7 +481,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0] // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
+      })[0], // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
     );
   });
 
@@ -516,7 +516,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })
+      }),
     );
   });
 });
@@ -542,7 +542,7 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[WARN:001]*'),
           }),
-        })
+        }),
       );
     });
   });
@@ -577,7 +577,7 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:001]*'),
         }),
-      })
+      }),
     );
   });
 });
@@ -614,7 +614,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 
@@ -631,7 +631,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      })
+      }),
     );
   });
 });
