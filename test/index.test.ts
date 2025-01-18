@@ -546,6 +546,40 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
       );
     });
   });
+
+  /**
+   * Sample Cfn Template
+   * "BooksApiGETApiPermissionTestStackBooksApiA2CED8D6GET911FB15C": {
+   *   "Type": "AWS::Lambda::Permission",
+   *   ...
+   *   "Metadata": {
+   *     "aws:cdk:path": "TestStack/BooksApi/Default/GET/ApiPermission.TestStackBooksApiA2CED8D6.GET.."
+   *   }
+   * }
+   */
+  test('No warning when NOT using Stack or Construct in Construct names', () => {
+    const app = new cdk.App();
+    stack = new Stack(app, 'Stack', {});
+    cdk.Aspects.of(app).add(new CdkMentor());
+
+    const api = new apigateway.RestApi(stack, 'BooksApi');
+    const fn = new lambda.Function(stack, 'LamDesFn', {
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'index.handler',
+      code: cdk.aws_lambda.Code.fromInline('exports.handler = async () => {};'),
+    });
+    api.root.addMethod('GET', new apigateway.LambdaIntegration(fn));
+
+    const messages = SynthUtils.synthesize(stack).messages;
+
+    expect(messages).not.toContainEqual(
+      expect.objectContaining({
+        entry: expect.objectContaining({
+          data: expect.stringMatching('.*[WARN:001]*'),
+        }),
+      }),
+    );
+  });
 });
 
 describe('Detecte strong cross-stack references ', () => {

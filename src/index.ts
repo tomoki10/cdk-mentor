@@ -4,6 +4,7 @@ import {
   EXCLUDED_PREFIX_NAMES,
   EXCLUDED_RESOURCE_TYPES,
   EXCLUDED_RESOURCE_AND_NAME_PATTERNS,
+  CONTAINING_STACK_NAME_RESOURCES,
 } from './excluded-resource-types';
 
 export class CdkMentor implements cdk.IAspect {
@@ -32,7 +33,7 @@ export class CdkMentor implements cdk.IAspect {
       /**
        * Do not include the words "Stack" or "Construct" in the Construct ID names
        */
-      if (constructId && constructId.includes('Stack')) {
+      if (constructId && constructId.includes('Stack') && !CONTAINING_STACK_NAME_RESOURCES.has(node.cfnResourceType)) {
         // MEMO: Exclude if it is a CrossStack reference
         // If the stack has CrossStack references and the resource is referencing another stack, exclude it
         const stack = cdk.Stack.of(node);
