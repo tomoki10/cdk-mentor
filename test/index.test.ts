@@ -43,7 +43,7 @@ describe('PascalCase Construct ID Check', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
   describe.each`
@@ -67,7 +67,7 @@ describe('PascalCase Construct ID Check', () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[ERR:001]*'),
           }),
-        }),
+        })
       );
     });
   });
@@ -121,7 +121,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -152,7 +152,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -238,7 +238,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -268,7 +268,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -305,7 +305,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -341,7 +341,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -369,7 +369,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0], // MEMO: EKS L2 construct includes two CloudFormation::Stack
+      })[0] // MEMO: EKS L2 construct includes two CloudFormation::Stack
     );
   });
 
@@ -402,7 +402,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -430,7 +430,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -481,7 +481,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      })[0], // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
+      })[0] // MEMO: Since ECS Patterns contains Nested Stacks internally, specify index 0
     );
   });
 
@@ -516,7 +516,7 @@ describe('CDK core constructs with non-PascalCase resources', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[ERR:001]*'),
         }),
-      }),
+      })
     );
   });
 });
@@ -542,9 +542,43 @@ describe("Avoid 'Stack' or 'Construct' in Construct names", () => {
           entry: expect.objectContaining({
             data: expect.stringMatching('.*[WARN:001]*'),
           }),
-        }),
+        })
       );
     });
+  });
+
+  /**
+   * Sample Cfn Template
+   * "BooksApiGETApiPermissionTestStackBooksApiA2CED8D6GET911FB15C": {
+   *   "Type": "AWS::Lambda::Permission",
+   *   ...
+   *   "Metadata": {
+   *     "aws:cdk:path": "TestStack/BooksApi/Default/GET/ApiPermission.TestStackBooksApiA2CED8D6.GET.."
+   *   }
+   * }
+   */
+  test('No warning when NOT using Stack or Construct in Construct names', () => {
+    const app = new cdk.App();
+    stack = new Stack(app, 'Stack', {});
+    cdk.Aspects.of(app).add(new CdkMentor());
+
+    const api = new apigateway.RestApi(stack, 'BooksApi');
+    const fn = new lambda.Function(stack, 'LamDesFn', {
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'index.handler',
+      code: cdk.aws_lambda.Code.fromInline('exports.handler = async () => {};'),
+    });
+    api.root.addMethod('GET', new apigateway.LambdaIntegration(fn));
+
+    const messages = SynthUtils.synthesize(stack).messages;
+
+    expect(messages).not.toContainEqual(
+      expect.objectContaining({
+        entry: expect.objectContaining({
+          data: expect.stringMatching('.*[WARN:001]*'),
+        }),
+      })
+    );
   });
 });
 
@@ -580,7 +614,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      }),
+      })
     );
   });
 
@@ -597,7 +631,7 @@ describe('Detecte strong cross-stack references ', () => {
         entry: expect.objectContaining({
           data: expect.stringMatching('.*[WARN:003]*'),
         }),
-      }),
+      })
     );
   });
 });

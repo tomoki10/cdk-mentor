@@ -44,3 +44,5 @@ export const EXCLUDED_RESOURCE_AND_NAME_PATTERNS: RESOURCE_AND_NAME_PATTERN[] = 
     namePattern: 'smsRole',
   },
 ];
+
+export const CONTAINING_STACK_NAME_RESOURCES = new Set(['AWS::Lambda::Permission']);
